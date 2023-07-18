@@ -1,18 +1,13 @@
-class Solution:
-    def romanToInt(self, s: str) -> int:
-        romanDict = {
-            "I": 1,
-            "V": 5,
-            "X": 10,
-            "L": 50,
-            "C": 100,
-            "D": 500,
-            "M": 1000
-        }
-        integer = 0
-        for i in range(len(s) - 1, -1, -1):
-            if i != len(s) - 1 and romanDict[s[i]] < romanDict[s[i+1]]:
-                integer -= romanDict[s[i]]
-            else:
-                integer += romanDict[s[i]]
-        return integer 
+class Solution(object):
+    def intToRoman(self, num):
+        """
+        :type num: int
+        :rtype: str
+        """
+
+        roman_dict = {1: 'I', 5:'V', 10:'X', 50:'L', 100:'C', 500 :'D', 1000:'M',4:'IV',9:'IX', 40:'XL', 90:'XC', 400: 'CD', 900:'CM'}
+        roman_val = ""
+        for key in reversed(sorted(list(roman_dict.keys()))):
+            roman_val += roman_dict[key]*(num//key)
+            num=num%key
+        return roman_val
